@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Grid System & Spacing</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Grid System & Spacing</h1>
+        
+        <!-- Grid Example -->
+        <div class="row mb-4">
+            <div class="col-md-4 bg-primary p-3 text-white">Column 1</div>
+            <div class="col-md-4 bg-success p-3 text-white">Column 2</div>
+            <div class="col-md-4 bg-danger p-3 text-white">Column 3</div>
+        </div>
+
+        <!-- Responsive Grid -->
+        <div class="row mb-4">
+            <div class="col-sm-6 col-lg-3 bg-info p-3 text-white mb-2">Small: 6, Large: 3</div>
+            <div class="col-sm-6 col-lg-3 bg-warning p-3 mb-2">Small: 6, Large: 3</div>
+            <div class="col-sm-6 col-lg-3 bg-secondary p-3 text-white mb-2">Small: 6, Large: 3</div>
+            <div class="col-sm-6 col-lg-3 bg-dark p-3 text-white">Small: 6, Large: 3</div>
+        </div>
+
+        <!-- Spacing Classes -->
+        <h3 class="mt-4 mb-3">Spacing Examples</h3>
+        
+        <div class="bg-light p-2 mb-3">
+            <p class="mt-2 mb-2 ps-3">Margin Top (mt-2), Margin Bottom (mb-2), Padding Start (ps-3)</p>
+        </div>
+
+        <div class="bg-light px-5 py-3">
+            <p>Padding X (px-5), Padding Y (py-3)</p>
+        </div>
+
+        <div class="bg-light mx-auto p-4" style="max-width: 300px;">
+            <p>Margin Auto (mx-auto) - Centered</p>
+        </div>
+
+        <!-- Gap in Grid -->
+        <div class="row g-4 mt-3">
+            <div class="col-md-6 bg-primary p-3 text-white">Gap Example 1</div>
+            <div class="col-md-6 bg-primary p-3 text-white">Gap Example 2</div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
