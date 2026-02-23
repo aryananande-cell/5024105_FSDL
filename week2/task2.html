@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>University Student Portal</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+/* ===== CSS3 SYNTAX ===== */
+/* selector { property: value; } */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    height:100vh;
+    background:linear-gradient(to right,#1e3c72,#2a5298);
+    color:white;
+    display:flex;
+    flex-direction:column;
+}
+header{
+    text-align:center;
+    padding:10px;
+    background:rgba(0,0,0,0.6);
+}
+header h1::first-letter{
+    color:yellow;
+    font-size:40px;
+}
+
+/* Layout */
+.main{
+    flex:1;
+    display:flex;
+    padding:15px;
+    gap:20px;
+}
+
+/* Table Section */
+.table-section{
+    flex:2;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    color:black;
+}
+th,td{
+    border:1px solid black;
+    padding:6px;
+    text-align:center;
+}
+
+th{
+    background:#2a5298;
+    color:white;
+}
+
+tr:nth-child(even){
+    background:#f2f2f2;
+}
+
+/* Form Section */
+.form-section{
+    flex:1;
+    background:rgba(255,255,255,0.2);
+    padding:15px;
+    border-radius:10px;
+}
+
+input{
+    width:100%;
+    padding:8px;
+    margin:8px 0;
+    border:none;
+    border-radius:5px;
+}
+
+/* Pseudo Class */
+input:focus{
+    outline:none;
+    border:2px solid yellow;
+}
+
+button{
+    width:100%;
+    padding:8px;
+    background:yellow;
+    border:none;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* Pseudo Class */
+button:hover{
+    background:orange;
+}
+ul{
+    list-style-type:square;
+    margin-top:10px;
+    padding-left:20px;
+}
+ul li::before{
+    content:"🎓 ";
+}
+footer{
+    text-align:center;
+    padding:5px;
+    background:black;
+}
+footer::after{
+    content:" | CSS3 Project";
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>University Student Portal</h1>
+</header>
+
+<div class="main">
+
+    <div class="table-section">
+        <h3>Student List</h3>
+        <table id="studentTable">
+            <tr>
+                <th>Roll No</th>
+                <th>Name</th>
+                <th>Department</th>
+            </tr>
+            <tr>
+                <td>101</td>
+                <td>Rahul</td>
+                <td>CS</td>
+            </tr>
+        </table>
+
+        <h3>Departments</h3>
+        <ul>
+            <li>Computer Science</li>
+            <li>Electronics</li>
+            <li>Mechanical</li>
+        </ul>
+    </div>
+
+    <div class="form-section">
+        <h3>Add Student</h3>
+        <input type="text" id="roll" placeholder="Roll No">
+        <input type="text" id="name" placeholder="Name">
+        <input type="text" id="dept" placeholder="Department">
+        <button onclick="addStudent()">Enter</button>
+    </div>
+
+</div>
+<footer>
+    © 2026 University Portal
+</footer>
+<script>
+function addStudent(){
+    var roll = document.getElementById("roll").value;
+    var name = document.getElementById("name").value;
+    var dept = document.getElementById("dept").value;
+
+    if(roll==="" || name==="" || dept===""){
+        alert("Please fill all fields");
+        return;
+    }
+
+    var table = document.getElementById("studentTable");
+    var row = table.insertRow(-1);
+
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+
+    cell1.innerHTML = roll;
+    cell2.innerHTML = name;
+    cell3.innerHTML = dept;
+
+    // Clear inputs
+    document.getElementById("roll").value="";
+    document.getElementById("name").value="";
+    document.getElementById("dept").value="";
+}
+</script>
+
+</body>
+</html>
