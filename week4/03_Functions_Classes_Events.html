@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Functions, Classes & Events</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; margin: 20px; background: #f0f2f5; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 3px solid #27ae60; padding-bottom: 10px; }
+        h2 { color: #27ae60; margin-top: 25px; }
+        .demo { background: #ecf0f1; padding: 15px; border-radius: 5px; margin: 10px 0; border-left: 4px solid #27ae60; }
+        .output { background: #2c3e50; color: #1abc9c; padding: 10px; border-radius: 5px; font-family: 'Courier New'; font-size: 12px; }
+        button { background: #27ae60; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; margin: 5px; }
+        button:hover { background: #229954; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>⚙️ Functions, Classes & Events</h1>
+        
+        <h2>Functions</h2>
+        <div class="demo">
+            <button onclick="showFunctions()">Functions Demo</button>
+            <div id="func-output" class="output"></div>
+        </div>
+
+        <h2>Classes & Objects</h2>
+        <div class="demo">
+            <button onclick="showClasses()">Classes Demo</button>
+            <div id="class-output" class="output"></div>
+        </div>
+
+        <h2>Events</h2>
+        <div class="demo">
+            <button onclick="handleClick()">Click Me! (Event Demo)</button>
+            <div id="event-output" class="output"></div>
+        </div>
+    </div>
+
+    <script>
+        function showFunctions() {
+            let output = '';
+            
+            output += '=== FUNCTION DECLARATION ===\n';
+            function add(a, b) { return a + b; }
+            output += `add(5, 3) = ${add(5, 3)}\n`;
+            
+            output += '\n=== ARROW FUNCTION ===\n';
+            const multiply = (x, y) => x * y;
+            output += `multiply(4, 5) = ${multiply(4, 5)}\n`;
+            
+            output += '\n=== REST PARAMETERS ===\n';
+            function sum(...nums) { return nums.reduce((a,b) => a+b, 0); }
+            output += `sum(1,2,3,4) = ${sum(1,2,3,4)}\n`;
+            
+            output += '\n=== HIGHER ORDER FUNCTION ===\n';
+            const double = (x) => x * 2;
+            output += `[1,2,3].map(double) = ${[1,2,3].map(double)}\n`;
+            
+            document.getElementById('func-output').textContent = output;
+        }
+
+        function showClasses() {
+            let output = '';
+            
+            output += '=== CLASS & OBJECT ===\n';
+            class Car {
+                constructor(brand, model) {
+                    this.brand = brand;
+                    this.model = model;
+                }
+                getDetails() {
+                    return `${this.brand} ${this.model}`;
+                }
+            }
+            const car = new Car('Toyota', 'Camry');
+            output += `Car: ${car.getDetails()}\n`;
+            
+            output += '\n=== INHERITANCE ===\n';
+            class Vehicle {
+                start() { return 'Engine started'; }
+            }
+            class Bike extends Vehicle {
+                ride() { return 'Riding bike'; }
+            }
+            const bike = new Bike();
+            output += `${bike.start()}\n${bike.ride()}\n`;
+            
+            output += '\n=== STATIC METHOD ===\n';
+            class Math2 {
+                static square(n) { return n * n; }
+            }
+            output += `square(5) = ${Math2.square(5)}\n`;
+            
+            document.getElementById('class-output').textContent = output;
+        }
+
+        function handleClick() {
+            let output = '=== EVENT TRIGGERED ===\n';
+            output += `✓ Button clicked!\n`;
+            output += `⏰ Time: ${new Date().toLocaleTimeString()}\n`;
+            output += `📍 Event: Click event detected\n`;
+            document.getElementById('event-output').textContent = output;
+        }
+    </script>
+</body>
+</html>

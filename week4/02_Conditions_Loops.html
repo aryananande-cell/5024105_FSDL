@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conditions & Loops</title>
+    <style>
+        body { font-family: 'Arial', sans-serif; margin: 20px; background: #f0f2f5; }
+        .container { max-width: 900px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; border-bottom: 3px solid #e74c3c; padding-bottom: 10px; }
+        h2 { color: #e74c3c; margin-top: 25px; }
+        .demo { background: #ecf0f1; padding: 15px; border-radius: 5px; margin: 10px 0; border-left: 4px solid #e74c3c; }
+        .output { background: #2c3e50; color: #f39c12; padding: 10px; border-radius: 5px; font-family: 'Courier New'; font-size: 12px; }
+        button { background: #e74c3c; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 14px; font-weight: bold; }
+        button:hover { background: #c0392b; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔄 Conditions & Loops</h1>
+        
+        <h2>If-Else Conditions</h2>
+        <div class="demo">
+            <button onclick="showConditions()">Run Conditions Demo</button>
+            <div id="cond-output" class="output"></div>
+        </div>
+
+        <h2>Loops</h2>
+        <div class="demo">
+            <button onclick="showLoops()">Run Loops Demo</button>
+            <div id="loop-output" class="output"></div>
+        </div>
+    </div>
+
+    <script>
+        function showConditions() {
+            let output = '';
+            let score = 75;
+            let age = 20;
+            
+            output += '=== IF-ELSE-IF ===\n';
+            if (score >= 90) output += `Score ${score}: Grade A\n`;
+            else if (score >= 80) output += `Score ${score}: Grade B\n`;
+            else if (score >= 70) output += `Score ${score}: Grade C\n`;
+            else output += `Score ${score}: Grade F\n`;
+            
+            output += '\n=== SWITCH ===\n';
+            let day = 3;
+            switch(day) {
+                case 1: output += 'Monday\n'; break;
+                case 2: output += 'Tuesday\n'; break;
+                case 3: output += 'Wednesday\n'; break;
+                default: output += 'Invalid day\n';
+            }
+            
+            output += '\n=== TERNARY ===\n';
+            output += `Age ${age} is ${age >= 18 ? 'Adult' : 'Minor'}\n`;
+            
+            document.getElementById('cond-output').textContent = output;
+        }
+
+        function showLoops() {
+            let output = '';
+            
+            output += '=== FOR LOOP ===\n';
+            for (let i = 1; i <= 3; i++) output += `i = ${i}\n`;
+            
+            output += '\n=== WHILE LOOP ===\n';
+            let count = 1;
+            while (count <= 3) {
+                output += `count = ${count}\n`;
+                count++;
+            }
+            
+            output += '\n=== FOR-OF ===\n';
+            for (let val of [10, 20, 30]) output += `Value: ${val}\n`;
+            
+            output += '\n=== BREAK/CONTINUE ===\n';
+            for (let i = 0; i < 5; i++) {
+                if (i === 2) continue;
+                if (i === 4) break;
+                output += `i = ${i}\n`;
+            }
+            
+            document.getElementById('loop-output').textContent = output;
+        }
+    </script>
+</body>
+</html>
