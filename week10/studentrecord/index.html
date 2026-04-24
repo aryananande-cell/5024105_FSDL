@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="studentApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Record Manager</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <!-- JS File -->
+    <script src="app.js"></script>
+</head>
+<body>
+
+    <div class="container" ng-controller="studentController">
+        <h1>Student Record Manager 🎓</h1>
+
+        <div class="form-card">
+            <form name="studentForm" novalidate ng-submit="submitForm()">
+
+                <div class="grid">
+                    <div class="field">
+                        <label>Student Name</label>
+                        <input
+                            type="text"
+                            name="studentName"
+                            ng-model="student.name"
+                            required
+                            minlength="3"
+                            placeholder="Enter full name">
+                        <span ng-show="studentForm.studentName.$touched && studentForm.studentName.$invalid">
+                            Valid name required (minimum 3 characters)
+                        </span>
+                    </div>
+
+                    <div class="field">
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            name="studentEmail"
+                            ng-model="student.email"
+                            required
+                            placeholder="Enter email">
+                        <span ng-show="studentForm.studentEmail.$touched && studentForm.studentEmail.$invalid">
+                            Valid email required
+                        </span>
+                    </div>
+
+                    <div class="field">
+                        <label>Age</label>
+                        <input
+                            type="number"
+                            name="studentAge"
+                            ng-model="student.age"
+                            required
+                            min="18"
+                            max="30"
+                            placeholder="Enter age">
+                        <span ng-show="studentForm.studentAge.$touched && studentForm.studentAge.$invalid">
+                            Age must be between 18 and 30
+                        </span>
+                    </div>
+
+                    <div class="field">
+                        <label>Gender</label>
+                        <select name="studentGender" ng-model="student.gender" required>
+                            <option value="" disabled selected>Select gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span ng-show="studentForm.studentGender.$touched && studentForm.studentGender.$invalid">
+                            Gender selection is required
+                        </span>
+                    </div>
+
+                    <div class="field">
+                        <label>Course</label>
+                        <input
+                            type="text"
+                            name="studentCourse"
+                            ng-model="student.course"
+                            required
+                            placeholder="Enter course name">
+                        <span ng-show="studentForm.studentCourse.$touched && studentForm.studentCourse.$invalid">
+                            Course is required
+                        </span>
+                    </div>
+
+                    <div class="field">
+                        <label>Year of Study</label>
+                        <select name="studentYear" ng-model="student.year" required>
+                            <option value="" disabled selected>Select year</option>
+                            <option value="1st Year">1st Year</option>
+                            <option value="2nd Year">2nd Year</option>
+                            <option value="3rd Year">3rd Year</option>
+                            <option value="4th Year">4th Year</option>
+                        </select>
+                        <span ng-show="studentForm.studentYear.$touched && studentForm.studentYear.$invalid">
+                            Year of study is required
+                        </span>
+                    </div>
+
+                    <div class="field">
+                        <label>GPA</label>
+                        <input
+                            type="number"
+                            name="studentGpa"
+                            ng-model="student.gpa"
+                            required
+                            step="0.1"
+                            min="0"
+                            max="10"
+                            placeholder="Enter GPA">
+                        <span ng-show="studentForm.studentGpa.$touched && studentForm.studentGpa.$invalid">
+                            GPA must be between 0.0 and 10.0
+                        </span>
+                    </div>
+
+                    <div class="field">
+                        <label>Enrollment Date</label>
+                        <input
+                            type="date"
+                            name="studentDate"
+                            ng-model="student.enrollmentDate"
+                            required>
+                        <span ng-show="studentForm.studentDate.$touched && studentForm.studentDate.$invalid">
+                            Enrollment date is required
+                        </span>
+                    </div>
+
+                    <div class="field full-width">
+                        <label>Notes</label>
+                        <textarea
+                            name="studentNotes"
+                            ng-model="student.notes"
+                            placeholder="Add optional notes or remarks"></textarea>
+                    </div>
+                </div>
+
+                <div class="button-row">
+                    <button type="submit" ng-disabled="studentForm.$invalid">Submit Record 🚀</button>
+                    <button type="button" class="secondary" ng-click="resetForm()">Reset Form</button>
+                </div>
+            </form>
+
+            <div class="preview" ng-if="student.name || student.course || student.email">
+                <h2>Live Preview</h2>
+                <p><strong>Name:</strong> {{student.name || '...'}}</p>
+                <p><strong>Course:</strong> {{student.course || '...'}}</p>
+                <p><strong>Year:</strong> {{student.year || '...'}}</p>
+                <p><strong>GPA:</strong> {{student.gpa || '...'}}</p>
+            </div>
+        </div>
+
+        <div class="summary" ng-show="students.length">
+            <div class="summary-box">
+                <strong>Total Students</strong>
+                <span>{{students.length}}</span>
+            </div>
+            <div class="summary-box">
+                <strong>Average GPA</strong>
+                <span>{{averageGpa() | number:2}}</span>
+            </div>
+            <div class="summary-box">
+                <strong>Youngest Age</strong>
+                <span>{{youngestAge()}}</span>
+            </div>
+        </div>
+
+        <div class="records" ng-show="students.length">
+            <div class="records-header">
+                <h2>Saved Student Records</h2>
+                <input
+                    type="text"
+                    placeholder="Search by name, course, or year"
+                    ng-model="searchText">
+            </div>
+
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Age</th>
+                            <th>Gender</th>
+                            <th>Course</th>
+                            <th>Year</th>
+                            <th>GPA</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="record in students | filter:recordFilter">
+                            <td>{{record.name}}</td>
+                            <td>{{record.email}}</td>
+                            <td>{{record.age}}</td>
+                            <td>{{record.gender}}</td>
+                            <td>{{record.course}}</td>
+                            <td>{{record.year}}</td>
+                            <td>{{record.gpa}}</td>
+                            <td>{{record.enrollmentDate | date:'mediumDate'}}</td>
+                            <td>
+                                <button type="button" class="remove" ng-click="removeStudent($index)">Remove</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="empty-state" ng-show="!students.length">
+            <p>No student records yet. Fill the form and submit to add the first record.</p>
+        </div>
+    </div>
+
+</body>
+</html>
