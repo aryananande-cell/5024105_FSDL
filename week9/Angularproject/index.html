@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colorful AngularJS Greeting App</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- AngularJS CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+    <!-- External JS -->
+    <script src="app.js"></script>
+</head>
+<body>
+
+    <div class="container" ng-controller="myController">
+        <h1>{{message}}</h1>
+
+        <p class="subtitle">Welcome to your colorful AngularJS project ✨</p>
+
+        <label>Enter Your Name:</label>
+        <input 
+            type="text" 
+            ng-model="name" 
+            placeholder="Type your beautiful name here">
+
+        <button ng-click="showMessage()">Click Me 🚀</button>
+
+        <h2 ng-show="name">
+            Hello, {{name}} 👋
+        </h2>
+
+        <p class="footer-text">
+            Learning AngularJS made easy 💙
+        </p>
+    </div>
+
+</body>
+</html>
